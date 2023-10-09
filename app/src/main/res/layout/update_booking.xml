@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_padding="20dp">
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+        <!-- Edit Reservation Information -->
+        <TextView
+            android:id="@+id/edit_reservation_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Reservation"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Edit Reservation Date -->
+        <EditText
+            android:id="@+id/edit_reservation_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edit Reservation Date"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Edit Number of Seats -->
+        <EditText
+            android:id="@+id/edit_seats_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edit Number of Seats"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/save_edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Changes"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
