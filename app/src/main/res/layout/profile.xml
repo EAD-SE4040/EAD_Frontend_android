@@ -6,7 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#EAEAEA"> <!-- A light gray background for a neutral appearance -->
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp"
+
+    android:background="#EAEAEA"
+    android:id="@+id/profileview"> <!-- A light gray background for a neutral appearance -->
 
     <!-- Profile Photo -->
     <ImageView
@@ -28,13 +32,15 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:src="@drawable/edit"
+        android:tooltipText="Edit Profile"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="24dp"
-        app:backgroundTint="@color/colorPrimary"
-        android:tooltipText="Edit Profile"/>
+        app:layout_constraintTop_toBottomOf="@+id/textAdditionalInfo" />
 
     <!-- Plain Text Fields using modern typography -->
     <TextView

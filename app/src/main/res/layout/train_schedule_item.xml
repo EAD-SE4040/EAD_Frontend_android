@@ -1,3 +1,91 @@
+<!--<androidx.cardview.widget.CardView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/train_schedule_card"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    app:cardElevation="4dp"-->
+<!--    app:cardCornerRadius="8dp"-->
+<!--    app:cardUseCompatPadding="true"-->
+<!--    android:layout_margin="16dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="16dp">-->
+
+<!--        &lt;!&ndash; Train Image &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:id="@+id/train_image"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="111dp"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:contentDescription="Train Image"-->
+<!--            android:src="@drawable/train_image4" />-->
+
+<!--        &lt;!&ndash; Train Schedule Information Container &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_marginStart="16dp">-->
+
+<!--            &lt;!&ndash; Train Schedule Information &ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/train_name_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Express"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/schedule_date_time_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:text="Scheduled Time: 2023-10-15 12:30 PM"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/seats_count_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Seats Available: 20"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:layout_marginTop="4dp"/>-->
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/from_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="From:"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="@android:color/darker_gray" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/to_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="To:"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="@android:color/darker_gray" />-->
+
+<!--       -->
+
+<!--            &lt;!&ndash; Add more schedule information as needed &ndash;&gt;-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+<!--</androidx.cardview.widget.CardView>-->
+
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -47,10 +135,10 @@
                 android:id="@+id/schedule_date_time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Scheduled Time: 2023-10-15 12:30 PM"
-                android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/seats_count_text"
@@ -62,15 +150,32 @@
                 android:layout_marginTop="4dp"/>
 
             <TextView
-                android:id="@+id/from_to_text"
+                android:id="@+id/from_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From: Vavuniya To: Colombo"
+                android:text="From:"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp"/>
+                android:textColor="@android:color/darker_gray" />
 
-            <!-- Add more schedule information as needed -->
+            <TextView
+                android:id="@+id/to_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To:"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+
+            <!-- Book Now Button -->
+            <Button
+                android:id="@+id/book_now_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:layout_marginTop="16dp"
+                android:onClick="onBookNowClick"
+                android:layout_gravity="end" /> <!-- This line aligns the button to the right -->
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
+

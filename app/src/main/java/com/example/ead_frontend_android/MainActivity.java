@@ -2,85 +2,62 @@ package com.example.ead_frontend_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
 
-import com.example.ead_frontend_android.Response.ReservationResponse;
-import com.example.ead_frontend_android.Response.TrainScheduleResponse;
-import com.example.ead_frontend_android.api.IService;
-import com.example.ead_frontend_android.api.RetrofitInstance;
+
 import com.example.ead_frontend_android.databinding.ActivityMainBinding;
-import com.example.ead_frontend_android.model.Reservation;
-import com.example.ead_frontend_android.model.TrainSchedule;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-//    ActivityMainBinding binding;
+    ActivityMainBinding binding;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
+        binding.bottomNavigationView.setBackground(null);
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.home111:
+                    replaceFragment(new HomeFragment());
+                    break;
+                case R.id.booking111:
+                    replaceFragment(new MyBookingFragment());
+                    break;
+                case R.id.profile111:
+                    replaceFragment(new ProfileFragment());
+                    break;
+            }
+            return true;
+        });
+    }
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
+}
+
+
+
+
+//    private Button button;
 //
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
 //
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()){
-//                case R.id.home:
-//                    replaceFragment(new HomeFragment());
-//                    break;
-//                case R.id.MyBooking:
-//                    replaceFragment(new MyBookingFragment());
-//                    break;
-//                case R.id.Profile:
-//                    replaceFragment(new ProfileFragment());
-//                    break;
-//            }
-//
-//            return true ;
-//        });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    }
-//    private void replaceFragment(Fragment fragment){
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.frame_layout,fragment);
-//        fragmentTransaction.commit();
-//    }
-
-    private Button button;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        button = findViewById(R.id.callid);
+//        button = findViewById(R.id.callid);
 // get trains part
 
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +195,40 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 // cacel reveration
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String idd = "65239f97955c2aaf630b6b3b";
+//
+//                Call<Void> call=RetrofitInstance.getRetrofitClient().create(IService.class).cancelReservation(idd);
+//
+//
+//                call.enqueue(new Callback<Void>() {
+//                    @Override
+//                    public void onResponse(Call<Void> call, Response<Void> response) {
+//                        if (response.isSuccessful()) {
+//                            // Handle a successful response
+//                            Log.d(TAG, "Reservation canceled successfully");
+//                        } else {
+//                            // Handle an unsuccessful response (e.g., HTTP error)
+//                            Log.d(TAG, "Request failed with HTTP error code: " + response.code());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Void> call, Throwable t) {
+//                        // Log the failure message
+//                        Log.d(TAG, "onFailure: " + t.getMessage());
+//                    }
+//                });
 
 
-    }
-}
+
+//
+//            }
+//        });
+
+
+//    }
+
+///}

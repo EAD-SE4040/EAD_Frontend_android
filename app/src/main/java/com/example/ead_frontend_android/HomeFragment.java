@@ -1,64 +1,100 @@
 package com.example.ead_frontend_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ead_frontend_android.Response.TrainScheduleResponse;
+import com.example.ead_frontend_android.adapter.IBooking;
+import com.example.ead_frontend_android.adapter.TrainAdapter;
+import com.example.ead_frontend_android.api.IService;
+import com.example.ead_frontend_android.api.RetrofitInstance;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends androidx.fragment.app.Fragment implements IBooking {
+    private static final String TAG = "HomeFragment";
+    
+    private RecyclerView recyclerView;
+    private TrainAdapter adapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private List<TrainScheduleResponse> trainSchedules;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+       View view=inflater.inflate(R.layout.fragment_home, container, false);
+       
+       recyclerView=view.findViewById(R.id.recycleid);
+       recyclerView.setHasFixedSize(true);
+       callAPI();
+       
+
+
+       
+       
+       return view;
+    }
+
+    private void callAPI() {
+
+        Call<List<TrainScheduleResponse>> call = RetrofitInstance.getRetrofitClient().create(IService.class).getTrainSchedule();
+
+        call.enqueue(new Callback<List<TrainScheduleResponse>>() {
+            @Override
+            public void onResponse(Call<List<TrainScheduleResponse>> call, Response<List<TrainScheduleResponse>> response) {
+                Log.d(TAG, "onResponse: Response Body: " + response.body().toString());
+                trainSchedules = response.body();
+                adapter=new TrainAdapter(getContext(),response.body());
+                recyclerView.setAdapter(adapter);
+                adapter.setiBooking(HomeFragment.this::booking);
+
+                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(linearLayoutManager);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<TrainScheduleResponse>> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.fillInStackTrace());
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void booking(int position) {
+        Log.e(TAG, "booking: "+ position );
+        Intent intent=new Intent(getContext(), AddBooking.class);
+        TrainScheduleResponse selected=trainSchedules.get(position);
+        intent.putExtra("id",""+selected.getId());
+        startActivity(intent);
+//        intent.putExtra("id",selected.getId());
+//        intent.putExtra("id",selected.getId());
+
     }
 }
