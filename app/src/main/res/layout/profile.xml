@@ -5,55 +5,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#EAEAEA"> <!-- A light gray background for a neutral appearance -->
 
     <!-- Profile Photo -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/person"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:elevation="6dp"
+        android:background="@drawable/person"
         android:scaleType="centerCrop"
-        android:elevation="4dp"
-        android:background="@drawable/circular_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/person"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.2"
-        app:layout_constraintDimensionRatio="1:1" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Edit Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_edit"
+        android:src="@drawable/edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        app:backgroundTint="@color/colorPrimary" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:tooltipText="Edit Profile"/>
 
-    <!-- Plain Text Fields -->
+    <!-- Plain Text Fields using modern typography -->
     <TextView
         android:id="@+id/textUsername"
-        style="@style/ProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Username"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textEmail"
-        style="@style/ProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,10 +61,9 @@
 
     <TextView
         android:id="@+id/textPassword"
-        style="@style/ProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,10 +71,9 @@
 
     <TextView
         android:id="@+id/textNIC"
-        style="@style/ProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="NIC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,10 +81,9 @@
 
     <TextView
         android:id="@+id/textAdditionalInfo"
-        style="@style/ProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Additional Info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
