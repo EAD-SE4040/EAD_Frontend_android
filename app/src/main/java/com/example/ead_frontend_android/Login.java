@@ -17,7 +17,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        homeTo=findViewById(R.id.btnid);
+        homeTo=findViewById(R.id.btnLogin);
 
         homeTo.setOnClickListener(new View.OnClickListener() {
             @Override
