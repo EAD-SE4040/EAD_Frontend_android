@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="custom_toast_background">#4CAF50</color>
+
+    <color name="custom_toast_text_color">#FFFFFF</color> <!-- Your desired text color -->
 </resources>

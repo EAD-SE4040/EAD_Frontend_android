@@ -1,18 +1,25 @@
 package com.example.ead_frontend_android.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static java.lang.String.format;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ead_frontend_android.AddBooking;
+import com.example.ead_frontend_android.HomeFragment;
+import com.example.ead_frontend_android.Login;
 import com.example.ead_frontend_android.R;
 import com.example.ead_frontend_android.Response.TrainScheduleResponse;
+import com.example.ead_frontend_android.SignUp;
 import com.example.ead_frontend_android.model.TrainSchedule;
 
 import java.text.SimpleDateFormat;
@@ -70,6 +77,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewhol
 
     public class TrainViewholder extends RecyclerView.ViewHolder {
         private TextView tvTitle,scheduleTime,seat,formtext,totext;
+        private Button book_button;
         public TrainViewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -78,10 +86,23 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewhol
             seat=itemView.findViewById(R.id.seats_count_text);
             formtext =itemView.findViewById(R.id.from_text);
             totext =itemView.findViewById(R.id.to_text);
+            book_button =itemView.findViewById(R.id.book_now_button);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if(iBooking!=null){
+//                        int postion=getAdapterPosition();
+//                        if(postion!=RecyclerView.NO_POSITION){
+//                            iBooking.booking(postion);
+//                        }
+//                    }
+//                }
+//            });
+
+            book_button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     if(iBooking!=null){
                         int postion=getAdapterPosition();
                         if(postion!=RecyclerView.NO_POSITION){
