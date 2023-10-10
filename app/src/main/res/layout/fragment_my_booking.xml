@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyBookingFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:title="My Bookings"
+        app:titleTextColor="#FFFFFF" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
+        android:id="@+id/bookingrecycleid"
+        android:textSize="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
 
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="My Bookings"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
-
-
-    </LinearLayout>
+        android:textAlignment="center"
+        android:textColor="@color/black"/>
 
 
 

@@ -1,6 +1,9 @@
 package com.example.ead_frontend_android;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.content.Context.MODE_PRIVATE;
+import static android.content.Intent.getIntent;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.ead_frontend_android.Response.ReservationResponse;
 import com.example.ead_frontend_android.api.IService;
 import com.example.ead_frontend_android.api.RetrofitInstance;
@@ -22,64 +27,63 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddBooking extends AppCompatActivity {
-    private static final String TAG = "AddBooking";
-    String trainid;
-    String trainName;
-    String sheduledatetime;
-    String userId;
-
-    String NIC ;
-
+public class EditReservation extends AppCompatActivity {
+    private static final String TAG = "EditReservation";
 
     private EditText seatCountInput;
 
-    private Button booking ;
+    private Button editbooking ;
 
-    private TextView train_name_text , schedule_date_time_text;
+
+    private TextView  schedule_date_time_text;
+
+    String trainid;
+
+    String reservationid;
+
+    String sheduledatetime;
+    String userId;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_booking);
+        setContentView(R.layout.update_booking);
 
-        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-         userId = preferences.getString("userId", null);
-
-        androidx.appcompat.widget.Toolbar toolbar=findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarupdate);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add Booking");
+        getSupportActionBar().setTitle("Edit Booking");
 
-        train_name_text = findViewById(R.id.train_name_text);
-        schedule_date_time_text = findViewById(R.id.schedule_date_time_text);
-        seatCountInput = findViewById(R.id.seat_count_input);
-        booking = findViewById(R.id.book_now_button);
+
+//        androidx.appcompat.widget.Toolbar toolbar=findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle("Add Booking");
+
+
+        schedule_date_time_text = findViewById(R.id.reservation_date_text);
+        seatCountInput = findViewById(R.id.editable_seats_count);
+        editbooking = findViewById(R.id.save_button);
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            trainid = extras.getString("id");
-            trainName = extras.getString("trainname");
+
+
+            reservationid = extras.getString("id");
+            trainid = extras.getString("trainid");
             sheduledatetime = extras.getString("sheduledatetime");
+            userId = extras.getString("userid");
 
-            train_name_text.setText(trainName);
+
             schedule_date_time_text.setText("Scheduled Time: " + sheduledatetime);
-//            seatCountInput.setText(id);
 
-            Log.e(TAG, "onCreate: trainName: " + trainName);
+
         }
 
-//        booking.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Define the Intent to navigate to the signup page
-//                Intent intent = new Intent(AddBooking.this, HomeFragment.class);
-//
-//                // Start the signup activity
-//                startActivity(intent);
-//            }
-//        });
 
-        booking.setOnClickListener(new View.OnClickListener() {
+        editbooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get the user-entered seat count from the seatCountInput EditText
@@ -87,23 +91,19 @@ public class AddBooking extends AppCompatActivity {
 
                 // Validate the input (you can add more validation logic)
                 if (seatCountStr.isEmpty()) {
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
+//                    LayoutInflater inflater = getLayoutInflater();
+//                    View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
 
-                    TextView text = layout.findViewById(R.id.custom_toast_text);
-                    // Show an error message to the user (e.g., by displaying a Toast)
-                    Toast.makeText(AddBooking.this, "Please enter the seat count", Toast.LENGTH_SHORT).show();
-//                    Toast toast = new Toast(getApplicationContext());
-//                    toast.setDuration(Toast.LENGTH_SHORT);
-//                    toast.setView(layout);
-//                    toast.setText("Please enter the seat count");
-//                    toast.show();
+//                    TextView text = layout.findViewById(R.id.custom_toast_text);
+
+                    Toast.makeText(EditReservation.this, "Please enter the seat count", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
                 // Parse the seat count as an integer
                 int seatCount = Integer.parseInt(seatCountStr);
-                NIC =  "992591641V";
+
 
                 // Create a Reservation object with the user input
                 Reservation reservation = new Reservation();
@@ -114,7 +114,7 @@ public class AddBooking extends AppCompatActivity {
                 reservation.setStatus(true);
 
                 // Create a Retrofit call to add the reservation
-                Call<ReservationResponse> call = RetrofitInstance.getRetrofitClient().create(IService.class).addReservation(reservation);
+                Call<ReservationResponse> call = RetrofitInstance.getRetrofitClient().create(IService.class).EditReservation(reservationid, reservation);
 
                 // Enqueue the call to send the reservation request
                 call.enqueue(new Callback<ReservationResponse>() {
@@ -127,20 +127,20 @@ public class AddBooking extends AppCompatActivity {
                                 Log.d(TAG, "onResponse: Reservation added: " + reservationResponse.toString());
 
                                 // You can provide feedback to the user here (e.g., a success message)
-                                Toast.makeText(AddBooking.this, "Booking successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditReservation.this, "Booking successful", Toast.LENGTH_SHORT).show();
 
                                 // Navigate to MainActivity after successful reservation
-                                Intent intent = new Intent(AddBooking.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
+//                                Intent intent = new Intent(EditReservation.this, MyBookingFragment.class);
+//                                startActivity(intent);
+//                                finish();
                             }
                         } else {
                             // Reservation request was unsuccessful
                             Log.d(TAG, "onResponse: Unsuccessful HTTP Status Code: " + response.code());
-                            Log.d(TAG, "onResponse: Response Body: " + response.toString());
+                            Log.d(TAG, "onResponse: Response Body: " + response.message());
 
                             // You can provide an error message to the user here
-                            Toast.makeText(AddBooking.this, "Booking failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditReservation.this, "Booking failed", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -151,12 +151,14 @@ public class AddBooking extends AppCompatActivity {
                         Log.d(TAG, "onFailure: " + t.getMessage());
 
                         // You can provide an error message to the user here
-                        Toast.makeText(AddBooking.this, "Booking failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditReservation.this, "Booking failed", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
+
+
         });
 
-    }
 
+    }
 }

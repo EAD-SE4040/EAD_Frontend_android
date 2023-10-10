@@ -22,10 +22,16 @@ public interface IService {
     @GET("/api/trains")
     Call<List<TrainScheduleResponse>> getTrainSchedule();
 
+    @GET("/api/reservation")
+    Call<List<ReservationResponse>> getAllReservation();
+
+    @GET("/bookings/user/{id}")
+    Call<List<ReservationResponse>> getUserReservation(@Path("id") String id);
+
     @POST("/api/reservation")
     Call<ReservationResponse> addReservation(@Body Reservation reservation);
 
-    @PUT("api/Reservation/{id}")
+    @PUT("api/reservation/{id}")
     Call<ReservationResponse> EditReservation(@Path("id") String id, @Body Reservation reservation);
 
 
@@ -37,14 +43,16 @@ public interface IService {
     @GET("api/user")
     Call<UserResponse> getUser(@Path("id") String id, @Body User user);
 
-    // signup
-    @POST("/api/user")
-    Call<UserResponse> signup (@Body User user);
+
 
     // user update
     @PUT("api/user/{id}")
     Call<UserResponse> UpdateUser(@Path("id") String id, @Body User user);
 
+
+    // signup
+    @POST("/api/user")
+    Call<UserResponse> signup (@Body User user);
     // login
     @POST("/api/user/login")
     Call<UserResponse> login (@Body User user);

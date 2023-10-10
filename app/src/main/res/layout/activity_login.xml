@@ -65,7 +65,7 @@
 
     <!-- Signup Text -->
     <TextView
-        android:id="@+id/textSignup"
+        android:id="@+id/textSignup_ex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account? Sign up here."

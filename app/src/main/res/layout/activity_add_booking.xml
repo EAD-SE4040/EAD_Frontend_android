@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddBooking">
+    tools:context=".AddBooking"
+  >
 
     <!-- Add Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -17,5 +18,91 @@
         app:title="Your Title"
         app:titleTextColor="#FFFFFF"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/train_schedule_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true"
+        android:padding="20dp"
+        android:layout_margin="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Train Image -->
+            <ImageView
+                android:id="@+id/train_image"
+                android:layout_width="100dp"
+                android:layout_height="111dp"
+                android:layout_gravity="start"
+                android:contentDescription="Train Image"
+                android:src="@drawable/train_image4" />
+
+            <!-- Train Schedule Information Container -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <!-- Train Schedule Information -->
+
+                <TextView
+                    android:id="@+id/train_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Express"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/schedule_date_time_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Scheduled Time: 2023-10-15 12:30 PM"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
+
+                <!-- Seat Count Input -->
+                <EditText
+                    android:id="@+id/seat_count_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Seat Count"
+                    android:inputType="number"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp" />
+
+
+
+                <!-- Book Now Button -->
+                <Button
+                    android:id="@+id/book_now_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Now"
+                    android:layout_marginTop="16dp"
+                    android:onClick="onBookNowClick"
+                    android:layout_gravity="end"
+                    android:textColor="#FFFFFF"
+                    android:background="?attr/colorPrimary" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>

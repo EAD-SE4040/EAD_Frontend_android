@@ -3,16 +3,18 @@ package com.example.ead_frontend_android.model;
 public class User {
 
 
+
     private String email ;
+    private String name;
     private String password;
     private String nic;
     private String phone;
     private String userType;
     private boolean isActive ;
 
-
-    public User(String email, String password, String nic, String phone, String userType, boolean isActive) {
+    public User(String email, String name, String password, String nic, String phone, String userType, boolean isActive) {
         this.email = email;
+        this.name = name;
         this.password = password;
         this.nic = nic;
         this.phone = phone;
@@ -29,6 +31,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
