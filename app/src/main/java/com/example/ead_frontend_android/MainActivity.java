@@ -6,31 +6,66 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.example.ead_frontend_android.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    String userId,userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if there are extras in the Intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // Retrieve the data using the keys you used when you added them in the Login activity
+             userId = extras.getString("userId");
+             userType = extras.getString("userType");
+
+            // Now, you can use the userId and name as needed in your MainActivity
+            // For example, you can display them in TextViews or manipulate your UI accordingly.
+        }
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String userId = preferences.getString("userId", ""); // Provide a default value in case the key is not found
+        String name = preferences.getString("usertype", "");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+
+
+
+
+        if ("traveler".equals(userType)) {
+            replaceFragment(new HomeFragment());
+        } else {
+            // Handle the case when the user is not a traveler.
+            replaceFragment(new ProfileFragment());
+        }
+
         binding.bottomNavigationView.setBackground(null);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home111:
-                    replaceFragment(new HomeFragment());
+                    if ("traveler".equals(userType)) {
+                        replaceFragment(new HomeFragment());
+                    } else {
+                        showMessageToChangeRole();
+                    }
                     break;
                 case R.id.booking111:
-                    replaceFragment(new MyBookingFragment());
+                    if ("traveler".equals(userType)) {
+                        replaceFragment(new MyBookingFragment());
+                    } else {
+                        showMessageToChangeRole();
+                    }
                     break;
                 case R.id.profile111:
                     replaceFragment(new ProfileFragment());
@@ -38,6 +73,22 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+    }
+
+    private void showMessageToChangeRole() {
+
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Access denied. Please switch to the 'traveler' role to continue.", Snackbar.LENGTH_SHORT);
+
+
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(getResources().getColor(R.color.customSnackbarBackground));
+
+// Show the Snackbar
+        snackbar.show();
+
+        // Or you can use a Toast:
+        // Toast.makeText(this, "Please change your role to 'traveler'", Toast.LENGTH_SHORT).show();
     }
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -49,186 +100,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-//    private Button button;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        button = findViewById(R.id.callid);
-// get trains part
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Call<List<TrainScheduleResponse>> call= RetrofitInstance.getRetrofitClient().create(IService.class).getTrainSchedule();
-//
-//                call.enqueue(new Callback<List<TrainScheduleResponse>>() {
-//                    @Override
-//                    public void onResponse(Call<List<TrainScheduleResponse>> call, Response<List<TrainScheduleResponse>> response) {
-////                        Log.d(TAG, "onResponse: ");
-//                        Log.d(TAG, "onResponse: Response Body: " + response.body().toString());
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<TrainScheduleResponse>> call, Throwable t) {
-//                        Log.d(TAG, "onFailure: "+t.fillInStackTrace());
-//                    }
-//                });
-//
-//            }
-//        });
-
-
-// add reveration
-//
-//
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Reservation reservation=new Reservation();
-//
-//
-//
-//                reservation.setUserID("652192d9cb3220501f934583");
-//                reservation.setTrainID("6522797b973c66d859a8fc0f");
-//                reservation.setReservationDate("2023-11-15T12:00:00");
-//                reservation.setNoOfSeates(69);
-//                reservation.setStatus(true);
-//
-//
-//
-//
-//                Call<ReservationResponse> call=RetrofitInstance.getRetrofitClient().create(IService.class).addReservation(reservation);
-//
-//
-//                call.enqueue(new Callback<ReservationResponse>() {
-//                    @Override
-//                    public void onResponse(Call<ReservationResponse> call, Response<ReservationResponse> response) {
-//                        if (response.isSuccessful()) {
-//                            ReservationResponse reservationResponse = response.body();
-//                            if (reservationResponse != null) {
-//                                // Log the HTTP status code and the response body
-//                                Log.d(TAG, "onResponse: HTTP Status Code: " + response.code());
-//                                Log.d(TAG, "onResponse: Response Body: " + reservationResponse.toString());
-//                            }
-//                        } else {
-//                            // Log the unsuccessful response
-//                            Log.d(TAG, "onResponse: Unsuccessful HTTP Status Code: " + response.code());
-//                            Log.d(TAG, "onResponse: Response Body: " + response.toString());
-//                        }
-//
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ReservationResponse> call, Throwable t) {
-//                        // Log the failure message
-//                        Log.d(TAG, "onFailure: " + t.getMessage());
-//                    }
-//                }
-//
-//                );
-//
-//            }
-//        });
-
-// edit reveration
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String idd = "65239f97955c2aaf630b6b3b";
-//                Reservation reservation=new Reservation();
-//
-//
-//
-//                reservation.setUserID("652192d9cb3220501f934583");
-//                reservation.setTrainID("6522797b973c66d859a8fc0f");
-//                reservation.setReservationDate("2023-11-15T12:00:00");
-//                reservation.setNoOfSeates(69);
-//                reservation.setStatus(true);
-//
-//
-//
-//
-//
-//                Call<ReservationResponse> call=RetrofitInstance.getRetrofitClient().create(IService.class).EditReservation(idd,reservation);
-//
-//
-//                call.enqueue(new Callback<ReservationResponse>() {
-//                                 @Override
-//                                 public void onResponse(Call<ReservationResponse> call, Response<ReservationResponse> response) {
-//                                     if (response.isSuccessful()) {
-//                                         ReservationResponse reservationResponse = response.body();
-//                                         if (reservationResponse != null) {
-//                                             // Log the HTTP status code and the response body
-//                                             Log.d(TAG, "onResponse: HTTP Status Code: " + response.code());
-//                                             Log.d(TAG, "onResponse: Response Body: " + reservationResponse.toString());
-//                                         }
-//                                     } else {
-//                                         // Log the unsuccessful response
-//                                         Log.d(TAG, "onResponse: Unsuccessful HTTP Status Code: " + response.code());
-//                                         Log.d(TAG, "onResponse: Response Body: " + response.toString());
-//                                     }
-//
-//
-//
-//                                 }
-//
-//                                 @Override
-//                                 public void onFailure(Call<ReservationResponse> call, Throwable t) {
-//                                     // Log the failure message
-//                                     Log.d(TAG, "onFailure: " + t.getMessage());
-//                                 }
-//                             }
-//
-//                );
-//
-//            }
-//        });
-
-// cacel reveration
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String idd = "65239f97955c2aaf630b6b3b";
-//
-//                Call<Void> call=RetrofitInstance.getRetrofitClient().create(IService.class).cancelReservation(idd);
-//
-//
-//                call.enqueue(new Callback<Void>() {
-//                    @Override
-//                    public void onResponse(Call<Void> call, Response<Void> response) {
-//                        if (response.isSuccessful()) {
-//                            // Handle a successful response
-//                            Log.d(TAG, "Reservation canceled successfully");
-//                        } else {
-//                            // Handle an unsuccessful response (e.g., HTTP error)
-//                            Log.d(TAG, "Request failed with HTTP error code: " + response.code());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Void> call, Throwable t) {
-//                        // Log the failure message
-//                        Log.d(TAG, "onFailure: " + t.getMessage());
-//                    }
-//                });
-
-
-
-//
-//            }
-//        });
-
-
-//    }
-
-///}

@@ -10,16 +10,24 @@ public class ReservationResponse {
     private int noOfSeates;
     private boolean status;
 
-    public ReservationResponse(String id, String userID, String trainID, String reservationDate, int noOfSeates, boolean status) {
+    private String nic;
+
+    private String trainName;
+
+
+
+    public ReservationResponse() {
+    }
+
+    public ReservationResponse(String id, String userID, String trainID, String reservationDate, int noOfSeates, boolean status, String nic, String trainName) {
         this.id = id;
         UserID = userID;
         this.trainID = trainID;
         this.reservationDate = reservationDate;
         this.noOfSeates = noOfSeates;
         this.status = status;
-    }
-
-    public ReservationResponse() {
+        this.nic = nic;
+        this.trainName = trainName;
     }
 
     public String getId() {
@@ -68,5 +76,21 @@ public class ReservationResponse {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public String getTrainName() {
+        return trainName;
+    }
+
+    public void setTrainName(String trainName) {
+        this.trainName = trainName;
     }
 }

@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ead_frontend_android.Response.ReservationResponse;
@@ -56,57 +58,67 @@ public class MyBookingFragment extends androidx.fragment.app.Fragment implements
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SharedPreferences preferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         userId = preferences.getString("userId", null);
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_my_booking, container, false);
-        recyclerView=view.findViewById(R.id.bookingrecycleid);
-
+        View view = inflater.inflate(R.layout.fragment_my_booking, container, false);
+        recyclerView = view.findViewById(R.id.bookingrecycleid);
 
         recyclerView.setHasFixedSize(true);
-        callAPI();
+
+        ProgressBar bookingProgressBar = view.findViewById(R.id.bookingProgressBar);
+        TextView emptyBookingTextView = view.findViewById(R.id.emptyBookingTextView);
+
+        // Initially, show loading indicator and hide RecyclerView
+        bookingProgressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        emptyBookingTextView.setVisibility(View.GONE);
+
+        callAPI(bookingProgressBar, recyclerView, emptyBookingTextView);
 
         return view;
     }
 
-    private void callAPI() {
 
+    private void callAPI(ProgressBar bookingProgressBar, RecyclerView recyclerView, TextView emptyBookingTextView) {
         Call<List<ReservationResponse>> call = RetrofitInstance.getRetrofitClient().create(IService.class).getUserReservation(userId);
+
 
         call.enqueue(new Callback<List<ReservationResponse>>() {
             @Override
             public void onResponse(Call<List<ReservationResponse>> call, Response<List<ReservationResponse>> response) {
-                Log.d(TAG, "onResponse: Response Body: " + response.body().toString());
-                reservationResponses = response.body();
-                adapter=new BookingAdapter(getContext(),response.body());
-                recyclerView.setAdapter(adapter);
-                adapter.setiResevation(MyBookingFragment.this::resevation);
+                bookingProgressBar.setVisibility(View.GONE);
 
-                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
-
+                if (response.isSuccessful()) {
+                    reservationResponses = response.body();
+                    if (reservationResponses != null && !reservationResponses.isEmpty()) {
+                        adapter = new BookingAdapter(getContext(), response.body());
+                        recyclerView.setAdapter(adapter);
+                        adapter.setiResevation(MyBookingFragment.this::resevation);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyBookingTextView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Log.d(TAG, "onResponse: Unsuccessful response");
+                }
             }
 
             @Override
             public void onFailure(Call<List<ReservationResponse>> call, Throwable t) {
+                bookingProgressBar.setVisibility(View.GONE);
                 Log.d(TAG, "onFailure: " + t.fillInStackTrace());
-
             }
         });
 
 
 
 
-
-
-
-
-
-
-
     }
+
 
 
 

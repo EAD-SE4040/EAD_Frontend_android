@@ -1,22 +1,20 @@
 package com.example.ead_frontend_android.Response;
 
+import com.example.ead_frontend_android.model.User;
+
 public class UserResponse {
 
-    private String id ;
-    private String email ;
-
+    private String id;
+    private String email;
     private String name;
-    private String password ;
-    private String nic ;
-    private String phone ;
-    private String userType ;
-    private boolean isActive ;
-
-
+    private String password;
+    private String nic;
+    private String phone;
+    private String userType;
+    private boolean isActive;
 
     public UserResponse() {
     }
-
 
     public UserResponse(String id, String email, String name, String password, String nic, String phone, String userType, boolean isActive) {
         this.id = id;
@@ -91,5 +89,19 @@ public class UserResponse {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    // Create a method to return a User object
+    public User getUser() {
+        // Create a User instance and populate it with the user data
+        User user = new User();
+
+        user.setEmail(email);
+        user.setName(name);
+        user.setPassword(password);
+        user.setNic(nic);
+        user.setPhone(phone);
+        user.setActive(isActive);
+        return user;
     }
 }

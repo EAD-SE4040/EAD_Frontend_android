@@ -6,7 +6,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Add ProgressBar for loading -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <!-- Add TextView for displaying "Train schedule is empty" message -->
+    <TextView
+        android:id="@+id/emptyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Train schedule is empty"
+        android:visibility="gone" />
+
+    <!-- Your existing layout elements -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -24,7 +40,6 @@
         android:layout_marginTop="70dp"
         android:layout_marginBottom="70dp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
-
+        android:textColor="@color/black" />
 
 </FrameLayout>

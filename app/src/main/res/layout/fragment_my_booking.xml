@@ -15,6 +15,21 @@
         app:title="My Bookings"
         app:titleTextColor="#FFFFFF" />
 
+
+    <ProgressBar
+        android:id="@+id/bookingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/emptyBookingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No bookings found"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
