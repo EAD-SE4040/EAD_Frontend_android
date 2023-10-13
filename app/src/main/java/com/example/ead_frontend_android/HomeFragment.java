@@ -30,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.content.SharedPreferences;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 /**
@@ -47,6 +49,8 @@ public class HomeFragment extends androidx.fragment.app.Fragment implements IBoo
 
     private List<TrainScheduleResponse> trainSchedules;
 
+    String userType;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,64 +60,68 @@ public class HomeFragment extends androidx.fragment.app.Fragment implements IBoo
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
-
-
-
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // ... (previous code)
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         // Set the Toolbar as the ActionBar for this fragment's activity
         if (getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         }
         setHasOptionsMenu(true);
-
-
+        SharedPreferences preferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        userType = preferences.getString("usertype", null);
         // Inflate the layout for this fragment
-       View view=inflater.inflate(R.layout.fragment_home, container, false);
-       
-       recyclerView=view.findViewById(R.id.recycleid);
-       recyclerView.setHasFixedSize(true);
-       callAPI();
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        recyclerView = view.findViewById(R.id.recycleid);
+        recyclerView.setHasFixedSize(true);
 
-       
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        TextView emptyTextView = view.findViewById(R.id.emptyTextView);
 
+        // Initially, show loading indicator and hide RecyclerView
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        emptyTextView.setVisibility(View.GONE);
 
-       
-       
-       return view;
+        callAPI(progressBar, recyclerView, emptyTextView);
+
+        return view;
     }
 
-    private void callAPI() {
-
+    private void callAPI(ProgressBar progressBar, RecyclerView recyclerView, TextView emptyTextView) {
         Call<List<TrainScheduleResponse>> call = RetrofitInstance.getRetrofitClient().create(IService.class).getTrainSchedule();
 
         call.enqueue(new Callback<List<TrainScheduleResponse>>() {
             @Override
             public void onResponse(Call<List<TrainScheduleResponse>> call, Response<List<TrainScheduleResponse>> response) {
-                Log.d(TAG, "onResponse: Response Body: " + response.body().toString());
-                trainSchedules = response.body();
-                adapter=new TrainAdapter(getContext(),response.body());
-                recyclerView.setAdapter(adapter);
-                adapter.setiBooking(HomeFragment.this::booking);
+                progressBar.setVisibility(View.GONE);
 
-                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
-
+                if (response.isSuccessful()) {
+                    trainSchedules = response.body();
+                    if (trainSchedules != null && !trainSchedules.isEmpty()) {
+                        adapter = new TrainAdapter(getContext(), response.body());
+                        recyclerView.setAdapter(adapter);
+                        adapter.setiBooking(HomeFragment.this::booking);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyTextView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Log.d(TAG, "onResponse: Unsuccessful response");
+                }
             }
 
             @Override
             public void onFailure(Call<List<TrainScheduleResponse>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Log.d(TAG, "onFailure: " + t.fillInStackTrace());
-
             }
         });
-
     }
+
 
 
     @Override

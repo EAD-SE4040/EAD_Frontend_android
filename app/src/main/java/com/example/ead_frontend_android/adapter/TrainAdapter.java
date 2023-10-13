@@ -88,17 +88,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewhol
             totext =itemView.findViewById(R.id.to_text);
             book_button =itemView.findViewById(R.id.book_now_button);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(iBooking!=null){
-//                        int postion=getAdapterPosition();
-//                        if(postion!=RecyclerView.NO_POSITION){
-//                            iBooking.booking(postion);
-//                        }
-//                    }
-//                }
-//            });
+
 
             book_button.setOnClickListener(new View.OnClickListener() {
                 @Override

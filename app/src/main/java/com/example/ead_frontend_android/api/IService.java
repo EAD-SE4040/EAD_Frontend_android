@@ -40,8 +40,8 @@ public interface IService {
 
     // user get
 
-    @GET("api/user")
-    Call<UserResponse> getUser(@Path("id") String id, @Body User user);
+    @GET("api/user/{id}")
+    Call<UserResponse> getUser(@Path("id") String id);
 
 
 

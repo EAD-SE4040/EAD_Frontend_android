@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ead_frontend_android.MyBookingFragment;
+//import com.example.ead_frontend_android.MyBookingFragment;
 import com.example.ead_frontend_android.R;
 import com.example.ead_frontend_android.Response.ReservationResponse;
 import com.example.ead_frontend_android.Response.TrainScheduleResponse;
@@ -74,8 +74,9 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookinVi
     public void onBindViewHolder(@NonNull BookingAdapter.BookinViewholder holder, int position) {
         ReservationResponse reservationResponse = mlist.get(position);
 
-        holder.reservation_date_text.setText("scheduled Time "+reservationResponse.getReservationDate());
-        holder.seats_count_text.setText("Booked Seats " + reservationResponse.getNoOfSeates());
+        holder.reservation_date_text.setText("scheduled Time :"+reservationResponse.getReservationDate());
+        holder.seats_count_text.setText("Booked Seats :" + reservationResponse.getNoOfSeates());
+        holder.Nic.setText("NIC  Number :" + reservationResponse.getNic());
 
 
 
@@ -90,12 +91,13 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookinVi
     }
 
     public class BookinViewholder extends RecyclerView.ViewHolder{
-        private TextView reservation_date_text,seats_count_text,status_text;
+        private TextView reservation_date_text,seats_count_text,status_text,Nic;
         private Button edit_button,cancel_button;
         public BookinViewholder(@NonNull View itemView) {
             super(itemView);
 
             reservation_date_text=itemView.findViewById(R.id.reservation_date_text);
+            Nic=itemView.findViewById(R.id.Nic);
             seats_count_text=itemView.findViewById(R.id.seats_count_text);
             edit_button = itemView.findViewById(R.id.edit_button); // Initialize the edit_button
             cancel_button = itemView.findViewById(R.id.cancel_button); // Initialize the cancel_button

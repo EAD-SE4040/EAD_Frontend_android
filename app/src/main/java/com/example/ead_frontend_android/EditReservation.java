@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class EditReservation extends AppCompatActivity {
     private static final String TAG = "EditReservation";
 
-    private EditText seatCountInput;
+    private EditText seatCountInput,nicInput;
 
     private Button editbooking ;
 
@@ -64,6 +64,7 @@ public class EditReservation extends AppCompatActivity {
 
         schedule_date_time_text = findViewById(R.id.reservation_date_text);
         seatCountInput = findViewById(R.id.editable_seats_count);
+        nicInput = findViewById(R.id.editable_seats_count);
         editbooking = findViewById(R.id.save_button);
 
 
@@ -88,15 +89,16 @@ public class EditReservation extends AppCompatActivity {
             public void onClick(View v) {
                 // Get the user-entered seat count from the seatCountInput EditText
                 String seatCountStr = seatCountInput.getText().toString();
+                String Nicnumber = nicInput.getText().toString();
 
                 // Validate the input (you can add more validation logic)
-                if (seatCountStr.isEmpty()) {
+                if (seatCountStr.isEmpty() && Nicnumber.isEmpty()) {
 //                    LayoutInflater inflater = getLayoutInflater();
 //                    View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
 
 //                    TextView text = layout.findViewById(R.id.custom_toast_text);
 
-                    Toast.makeText(EditReservation.this, "Please enter the seat count", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditReservation.this, "Please filled fileds ", Toast.LENGTH_SHORT).show();
 
                     return;
                 }
@@ -112,6 +114,7 @@ public class EditReservation extends AppCompatActivity {
                 reservation.setReservationDate(sheduledatetime);
                 reservation.setNoOfSeates(seatCount); // Set the user-entered seat count
                 reservation.setStatus(true);
+                reservation.setNic(Nicnumber);
 
                 // Create a Retrofit call to add the reservation
                 Call<ReservationResponse> call = RetrofitInstance.getRetrofitClient().create(IService.class).EditReservation(reservationid, reservation);
