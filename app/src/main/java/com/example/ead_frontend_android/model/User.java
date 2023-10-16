@@ -3,7 +3,7 @@ package com.example.ead_frontend_android.model;
 public class User {
 
 
-
+    private String id;
     private String email ;
     private String name;
     private String password;
@@ -12,7 +12,8 @@ public class User {
     private String userType;
     private boolean isActive ;
 
-    public User(String email, String name, String password, String nic, String phone, String userType, boolean isActive) {
+    public User(String id, String email, String name, String password, String nic, String phone, String userType, boolean isActive) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
@@ -79,5 +80,13 @@ public class User {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

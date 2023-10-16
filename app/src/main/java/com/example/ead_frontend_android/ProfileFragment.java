@@ -56,6 +56,7 @@ public class ProfileFragment extends androidx.fragment.app.Fragment {
 
         SharedPreferences preferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         userId = preferences.getString("userId", null);
+        ruserType = preferences.getString("usertype", null);
 
         // Set the Toolbar as the ActionBar for this fragment's activity
         if (getActivity() instanceof AppCompatActivity) {
@@ -108,6 +109,7 @@ public class ProfileFragment extends androidx.fragment.app.Fragment {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.remove("userId");
                 editor.remove("usertype");
+                editor.remove("nic");
                 editor.clear();
                 editor.apply();
 
@@ -146,7 +148,7 @@ public class ProfileFragment extends androidx.fragment.app.Fragment {
                         rpassword = user.getPassword();
                         rnic = user.getNic();
                         rphonenumver = user.getPhone();
-                        ruserType = user.getUserType();
+//                        ruserType = user.getUserType();
                         ruserisactive = user.isActive();
 
 
@@ -157,6 +159,7 @@ public class ProfileFragment extends androidx.fragment.app.Fragment {
                         textPassword.setText("Password: " + user.getPassword());
                         textNIC.setText("Nic: " + user.getNic());
                         textPhoenumber.setText("PhoneNumber: " + user.getPhone());
+
                     }
                 } else {
                     // Handle the error case

@@ -129,12 +129,18 @@ public class MyBookingFragment extends androidx.fragment.app.Fragment implements
     @Override
     public void resevation (int position) {
         Log.e(TAG, "booking: "+ position );
+
         Intent intent=new Intent(getContext(), EditReservation.class);
         ReservationResponse selected=reservationResponses.get(position);
+        Log.e(TAG, "bookingsayanthan: "+ selected.getUserID() );
         intent.putExtra("id",""+selected.getId());
         intent.putExtra("trainid",""+selected.getTrainID());
         intent.putExtra("sheduledatetime",""+selected.getReservationDate());
-        intent.putExtra("userid",""+selected.getUserID());
+        intent.putExtra("userid",""+ userId);
+        intent.putExtra("Trainname",""+selected.getTrainName());
+        intent.putExtra("status",""+selected.isStatus());
+        intent.putExtra("Nic",""+selected.getNic());
+
         String idd = selected.getId();
 
 

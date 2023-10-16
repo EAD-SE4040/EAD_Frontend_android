@@ -1,0 +1,26 @@
+<!-- custom_success_toast.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00FF00"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Success Icon"
+        android:src="@drawable/baseline_check_circle_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="6dp"
+        android:gravity="center_vertical"
+        android:text="Custom Success Message"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:id="@+id/sucessmessage"/>
+
+</LinearLayout>

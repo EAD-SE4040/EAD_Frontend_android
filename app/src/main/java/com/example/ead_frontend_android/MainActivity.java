@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             // Retrieve the data using the keys you used when you added them in the Login activity
-             userId = extras.getString("userId");
-             userType = extras.getString("userType");
+//             userId = extras.getString("userId");
+//             userType = extras.getString("userType");
 
             // Now, you can use the userId and name as needed in your MainActivity
             // For example, you can display them in TextViews or manipulate your UI accordingly.
         }
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String userId = preferences.getString("userId", ""); // Provide a default value in case the key is not found
-        String name = preferences.getString("usertype", "");
+        userId = preferences.getString("userId", ""); // Provide a default value in case the key is not found
+        userType = preferences.getString("usertype", "");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

@@ -2,7 +2,7 @@ package com.example.ead_frontend_android.model;
 
 public class Reservation {
 
-
+    private String id;
     private String UserID;
     private String TrainID;
     private String ReservationDate;
@@ -16,7 +16,8 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(String userID, String trainID, String reservationDate, int noOfSeates, boolean status, String nic, String trainName) {
+    public Reservation(String id, String userID, String trainID, String reservationDate, int noOfSeates, boolean status, String nic, String trainName) {
+        this.id = id;
         UserID = userID;
         TrainID = trainID;
         ReservationDate = reservationDate;
@@ -82,4 +83,11 @@ public class Reservation {
         this.trainName = trainName;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -1,96 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-  >
+    android:background="#F5F5F5"> <!-- Changed background color -->
 
-    <!-- Include the Toolbar -->
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbarupdate"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        app:title="Edit Resevation"-->
-<!--        app:titleTextColor="#FFFFFF"-->
-<!--        app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />-->
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarupdate"
-
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="Your Title"
-        app:titleTextColor="#FFFFFF"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-    <!-- Your Existing Layout -->
-    <LinearLayout
+        app:titleTextColor="#FFFFFF" />
+
+    <!-- Coordinator Layout -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="75dp"
-        android:padding="30dp">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarupdate">
 
-        <ImageView
-            android:id="@+id/reservation_image"
+        <!-- ScrollView for Scrolling Content -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Reservation Image"
-            android:src="@drawable/resevation" />
+            android:layout_height="match_parent">
 
-        <!-- Reservation Information -->
-        <TextView
-            android:id="@+id/reservation_date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reservation Date: 2023-10-15 12:00 PM"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- Editable Seat Count -->
-        <EditText
-            android:id="@+id/editable_seats_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Edit Number of Seats"
-            android:inputType="number"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="4dp" />
-        <EditText
-            android:id="@+id/Nicedit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nic number"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="4dp" />
+                <!-- ImageView -->
+                <ImageView
+                    android:id="@+id/reservation_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:contentDescription="Reservation Image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/resevation" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/status_text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Status: Confirmed"-->
-<!--            android:textSize="16sp"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:layout_marginTop="4dp" />-->
+                <!-- Reservation Information -->
+                <TextView
+                    android:id="@+id/trainName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Train Name: Express"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
-        <!-- Save Button -->
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:textSize="14sp"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            android:elevation="8dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <TextView
+                    android:id="@+id/reservation_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Reservation Date: 2023-10-15 12:00 PM"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <!-- Editable Seat Count -->
+                <EditText
+                    android:id="@+id/editable_seats_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Edit Number of Seats"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#546E7A"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/Nicedit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="NIC Number"
+                    android:minHeight="48dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#546E7A"
+                    android:textSize="18sp" />
+
+                <!-- Save Button -->
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/colorPrimary"
+                    android:elevation="8dp"
+                    android:text="Save"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

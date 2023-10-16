@@ -21,7 +21,7 @@ public class ReservationResponse {
 
     public ReservationResponse(String id, String userID, String trainID, String reservationDate, int noOfSeates, boolean status, String nic, String trainName) {
         this.id = id;
-        UserID = userID;
+        this.UserID = userID;
         this.trainID = trainID;
         this.reservationDate = reservationDate;
         this.noOfSeates = noOfSeates;
