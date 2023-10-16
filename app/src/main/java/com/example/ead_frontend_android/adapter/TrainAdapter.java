@@ -5,6 +5,7 @@ import static java.lang.String.format;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.example.ead_frontend_android.Response.TrainScheduleResponse;
 import com.example.ead_frontend_android.SignUp;
 import com.example.ead_frontend_android.model.TrainSchedule;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -53,16 +55,32 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewhol
     public void onBindViewHolder(@NonNull TrainViewholder holder, int position) {
 
 
-
-
-
         TrainScheduleResponse trainSchedule=mlist.get(position);
+//        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date;
+
+//
+//        try {
+//            date = inputFormat.parse(trainSchedule.getScheduleDateTime());
+//
+//            // Now, you can format the date into a different format, e.g., "MMM dd, yyyy hh:mm a"
+//            SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+//            String formattedDateTime = outputFormat.format(date);
+//            holder.scheduleTime.setText("Scheduled Time - "+ formattedDateTime);
+//            // Now, formattedDateTime contains the formatted date and time
+//            // You can use it as needed
+//            Log.d("FormattedDateTime", formattedDateTime);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
+
 
         holder.tvTitle.setText(trainSchedule.getTrainName());
-        holder.scheduleTime.setText((trainSchedule.getScheduleDateTime()));
-        holder.seat.setText("Available seats "+trainSchedule.getSeatsCount());
-        holder.formtext.setText("From "+trainSchedule.getFrom());
-        holder.totext.setText("TO "+trainSchedule.getTo());
+        holder.scheduleTime.setText(trainSchedule.getScheduleDateTime());
+        holder.seat.setText("Available seats -  "+trainSchedule.getSeatsCount());
+        holder.formtext.setText("Departure - "+trainSchedule.getFrom());
+        holder.totext.setText("Destination -  "+trainSchedule.getTo());
 
 
     }

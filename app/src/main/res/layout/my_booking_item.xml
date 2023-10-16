@@ -5,16 +5,17 @@
     android:id="@+id/reservation_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true"
-    android:layout_margin="16dp">
+    android:layout_margin="9dp"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="19dp">
 
         <!-- Reservation Image -->
         <ImageView
@@ -27,12 +28,23 @@
 
         <!-- Reservation Information -->
         <TextView
+            android:id="@+id/reservation_TrainName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Express"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
             android:id="@+id/reservation_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reservation Date: 2023-10-15 12:00 PM"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:text="Scheduled Date and Time: 2023-10-15 12:00 PM"
+            android:textSize="18sp"
+            android:textStyle="italic"
+
             android:layout_marginTop="8dp"/>
 
         <TextView
@@ -40,18 +52,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Number of Seats: 3"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/Nic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nic: 992591641V"
-            android:textSize="16sp"
+            android:text="NIC: 992591641V"
+            android:textSize="18sp"
+            android:textStyle="italic"
+
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="8dp"/>
 
         <!-- Edit and Cancel Buttons -->
         <LinearLayout
@@ -66,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Edit"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimary"
                 android:elevation="8dp"
@@ -78,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:background="@color/colorAccent"
                 android:elevation="8dp"

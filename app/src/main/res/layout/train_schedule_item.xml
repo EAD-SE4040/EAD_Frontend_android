@@ -7,10 +7,10 @@
     android:id="@+id/train_schedule_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true"
-    android:layout_margin="16dp">
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:text="Express"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="20dp"
+               android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/schedule_date_time_text"
@@ -51,16 +52,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Scheduled Time: 2023-10-15 12:30 PM"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/seats_count_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seats Available: 20"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                android:textColor="@android:color/background_dark"
                 android:layout_marginTop="4dp"/>
 
             <TextView
@@ -68,16 +69,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From:"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textSize="16sp"
+                android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/to_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="To:"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textSize="16sp"
+                android:textColor="@android:color/background_dark" />
 
             <!-- Book Now Button -->
             <Button

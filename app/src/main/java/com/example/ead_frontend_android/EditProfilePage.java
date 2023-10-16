@@ -30,7 +30,7 @@ public class EditProfilePage extends AppCompatActivity {
     private EditText editNic;
     private EditText editPhoneNumber;
     private Button saveButton;
-    private String userId,username,userEmail,userPassword,userNIC,userPhone,userType;
+    private String userId, username, userEmail, userPassword, userNIC, userPhone, userType;
     boolean userIsactive;
 
 
@@ -52,15 +52,14 @@ public class EditProfilePage extends AppCompatActivity {
 
         // Retrieve the data from the Intent
         Intent intent = getIntent();
-      userId = intent.getStringExtra("id");
+        userId = intent.getStringExtra("id");
         username = intent.getStringExtra("username");
-      userEmail = intent.getStringExtra("userEmail");
-      userPassword = intent.getStringExtra("userPassword");
-      userNIC = intent.getStringExtra("userNIC");
-   userPhone = intent.getStringExtra("userPhone");
-   userType = intent.getStringExtra("userType");
-    userIsactive = intent.getBooleanExtra("userIsactive",userIsactive);
-
+        userEmail = intent.getStringExtra("userEmail");
+        userPassword = intent.getStringExtra("userPassword");
+        userNIC = intent.getStringExtra("userNIC");
+        userPhone = intent.getStringExtra("userPhone");
+        userType = intent.getStringExtra("userType");
+        userIsactive = intent.getBooleanExtra("userIsactive", userIsactive);
 
 
         editName.setText(username);
@@ -69,7 +68,6 @@ public class EditProfilePage extends AppCompatActivity {
         editPassword.setText(userPassword);
         editNic.setText(userNIC);
         editPhoneNumber.setText(userPhone);
-
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +82,7 @@ public class EditProfilePage extends AppCompatActivity {
 
                 // Create a User object with the updated details
                 User updatedUser = new User();
-//                updatedUser.setId(userId);
+                updatedUser.setId(userId);
                 updatedUser.setName(updatedName);
                 updatedUser.setEmail(updatedEmail);
                 updatedUser.setPassword(updatedPassword);
@@ -101,26 +99,19 @@ public class EditProfilePage extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                         Log.d(TAG, "comedata2  " + updatedUser.toString());
+
                         if (response.isSuccessful()) {
-                            Log.d(TAG, "comedata3  " + updatedUser.toString());
-                            UserResponse userResponse = response.body();
-                            if (userResponse != null) {
-                                // User details were successfully updated
-                                Log.d(TAG, "onResponse: User details updated: " + userResponse.toString());
+                            // User details were successfully updated
 
-                                // Provide feedback to the user (e.g., a success message)
+                            // Provide feedback to the user (e.g., a success message)
+                            Toast.makeText(EditProfilePage.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditProfilePage.this, MainActivity.class);
 //                                Intent intent = new Intent(EditProfilePage.this, ProfileFragment.class);
-                                Intent intent = new Intent(EditProfilePage.this, ProfileFragment.class);
-                                startActivity(intent);
-                                // Start the signup activity
-                                Toast.makeText(EditProfilePage.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-
-
-                                // Start the signup activity
-
-                                // You can finish this activity or navigate to another page
-                                // finish();
-                            }
+                            startActivity(intent);
+//                                // Start the signup activity
+//                                Toast.makeText(EditProfilePage.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                            // You can finish this activity or navigate to another page
+                            // finish();
                         } else {
                             // Update request was unsuccessful
                             Log.d(TAG, "onResponse: Unsuccessful HTTP Status Code: " + response.code());
@@ -129,6 +120,36 @@ public class EditProfilePage extends AppCompatActivity {
                             // Provide an error message to the user
                             Toast.makeText(EditProfilePage.this, "Profile update failed", Toast.LENGTH_SHORT).show();
                         }
+
+//                        if (response.isSuccessful()) {
+//                            Log.d(TAG, "comedata3  " + updatedUser.toString());
+//                            UserResponse userResponse = response.body();
+//
+//                            if (userResponse != null) {
+//                                // User details were successfully updated
+//                                Log.d(TAG, "onResponse: User details updated: " + userResponse.toString());
+//
+//                                // Provide feedback to the user (e.g., a success message)
+////                                Intent intent = new Intent(EditProfilePage.this, ProfileFragment.class);
+//                                Intent intent = new Intent(EditProfilePage.this, ProfileFragment.class);
+//                                startActivity(intent);
+//                                // Start the signup activity
+//                                Toast.makeText(EditProfilePage.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+//
+//
+//                                // Start the signup activity
+//
+//                                // You can finish this activity or navigate to another page
+//                                // finish();
+//                            }
+//                        } else {
+//                            // Update request was unsuccessful
+//                            Log.d(TAG, "onResponse: Unsuccessful HTTP Status Code: " + response.code());
+//                            Log.d(TAG, "onResponse: Response Body: " + response.message());
+//
+//                            // Provide an error message to the user
+//                            Toast.makeText(EditProfilePage.this, "Profile update failed", Toast.LENGTH_SHORT).show();
+//                        }
                     }
 
                     @Override

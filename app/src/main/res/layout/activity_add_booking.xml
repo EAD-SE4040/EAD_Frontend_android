@@ -21,9 +21,6 @@
 
 
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/train_schedule_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,18 +70,47 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Scheduled Time: 2023-10-15 12:30 PM"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@android:color/background_dark"
                     android:textSize="14sp" />
 
                 <!-- Seat Count Input -->
+<!--                <TextView-->
+<!--                    android:id="@+id/nicinput"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="User Nic number "-->
+<!--                    android:textColor="@android:color/darker_gray"-->
+<!--                    android:textSize="14sp" />-->
+<!--                -->
+<!--                <TextView-->
+<!--                    android:id="@+id/nicinput"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:textSize="16sp" />-->
+
                 <EditText
                     android:id="@+id/seat_count_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:hint="Enter Seat Count"
                     android:inputType="number"
-                    android:layout_marginTop="8dp"
+                    android:minHeight="48dp"
                     android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/nicinput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Enter Seat Count"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:textSize="16sp" />
+
 
 
 
@@ -94,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Book Now"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:onClick="onBookNowClick"
                     android:layout_gravity="end"
                     android:textColor="#FFFFFF"
